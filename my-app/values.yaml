@@ -35,6 +35,8 @@ nginx:
   replicaCount: 1
 prometheus:
   enabled: true
+  serviceMonitor:
+    enabled: false  # Set to true only after installing Prometheus Operator
   retention:
     time: 15d
     size: 50GB
