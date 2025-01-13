@@ -12,4 +12,4 @@ metadata:
     {{- if .Values.global.annotations }}
     {{- toYaml .Values.global.annotations | nindent 4 }}
     {{- end }}
-    argocd.argoproj.io/sync-wave: "-1"  # Ensures namespace is created first
+    argocd.argoproj.io/sync-wave: "-1"
