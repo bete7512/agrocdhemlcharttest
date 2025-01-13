@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    events {
+      worker_connections 1024;
+    }
+    http {
+      upstream frontend {
+        server frontend-service;
+      }
+      upstream backend {
+        server backend-service:3000;
+      }
+      server {
+        listen 80;
+        location / {
+          proxy_pass http://frontend;
+        }
+        location /api {
+          proxy_pass http://backend;
+          rewrite ^/api/(.*) /$1 break;
+        }
+      }
+    }

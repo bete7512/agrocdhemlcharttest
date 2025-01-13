@@ -1,0 +1,17 @@
+replicaCount: 2
+image:
+  repository: jameslee/vue-hello-world
+  tag: 1.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi

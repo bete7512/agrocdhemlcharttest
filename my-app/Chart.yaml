@@ -1,5 +1,23 @@
 apiVersion: v2
-name: my-app
-description: A sample web application
-version: 0.1.0
-appVersion: "1.0.0"
+name: my-stack
+description: Complete application stack
+version: 1.0.0
+dependencies:
+  - name: backend
+    version: 1.0.0
+    condition: backend.enabled
+  - name: frontend
+    version: 1.0.0
+    condition: frontend.enabled
+  - name: mongodb
+    version: 1.0.0
+    condition: mongodb.enabled
+  - name: nginx
+    version: 1.0.0
+    condition: nginx.enabled
+
+# apiVersion: v2
+# name: my-app
+# description: A sample web application
+# version: 0.1.0
+# appVersion: "1.0.0"
