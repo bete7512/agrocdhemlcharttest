@@ -1,21 +1,27 @@
 apiVersion: v2
 name: my-app
-description: Complete application stack
+description: Complete application
 version: 1.0.0
+type: application
+
+# Dependencies section
 dependencies:
   - name: backend
     version: 1.0.0
+    repository: file://charts/backend
     condition: backend.enabled
   - name: frontend
     version: 1.0.0
+    repository: file://charts/frontend
     condition: frontend.enabled
   - name: mongodb
     version: 1.0.0
+    repository: file://charts/mongodb
     condition: mongodb.enabled
   - name: nginx
     version: 1.0.0
+    repository: file://charts/nginx
     condition: nginx.enabled
-
 # apiVersion: v2
 # name: my-app
 # description: A sample web application
