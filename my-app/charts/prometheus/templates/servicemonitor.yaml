@@ -1,5 +1,4 @@
-{{- if .Values.prometheus.serviceMonitors.enabled }}
-{{- if (semverCompare ">=1.16-0" .Capabilities.KubeVersion.GitVersion) }}
+{{- if and .Values.prometheus.enabled .Values.prometheus.serviceMonitors.enabled }}
 {{- if .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -45,6 +44,5 @@ spec:
   endpoints:
     - port: mongodb
       path: /metrics
-{{- end }}
 {{- end }}
 {{- end }}
