@@ -12,7 +12,9 @@ resources:
 
 storage:
   size: 50Gi
-serviceMonitors:
+serviceMonitor:
+  enabled: false
+monitors:
   enabled: true
   backend:
     enabled: true
