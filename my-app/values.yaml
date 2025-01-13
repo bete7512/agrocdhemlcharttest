@@ -43,7 +43,7 @@ nginx:
 
 prometheus:
   enabled: true
-  serviceMonitor:
+  serviceMonitors:
     enabled: false    # This is the main serviceMonitor setting
   retention:
     time: 15d

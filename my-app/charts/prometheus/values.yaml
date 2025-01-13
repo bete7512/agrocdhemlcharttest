@@ -12,7 +12,7 @@ resources:
 
 storage:
   size: 50Gi
-serviceMonitor:
+serviceMonitors:
   enabled: false
 monitors:
   enabled: true
