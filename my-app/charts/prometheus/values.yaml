@@ -14,7 +14,7 @@ storage:
   size: 50Gi
 enabled: true
 serviceMonitors:
-  enabled: false
+  enabled: true
 monitors:
   backend:
     enabled: true
