@@ -10,10 +10,4 @@ service:
   port: 80
 
 ingress:
-  enabled: true
-  className: nginx
-  hosts:
-    - host: myapp.example.com
-      paths:
-        - path: /
-          pathType: Prefix
+  enabled: false     # Disabled ingress
