@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "grafana.fullname" . }}
+  name: grafana
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "grafana.labels" . | nindent 4 }}
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "grafana.labels" . | nindent 6 }}
+      app: grafana
   template:
     metadata:
       labels:
-        {{- include "grafana.labels" . | nindent 8 }}
+        app: grafana
     spec:
       containers:
         - name: grafana
@@ -29,28 +29,19 @@ spec:
               mountPath: /etc/grafana/provisioning/dashboards
             - name: grafana-dashboards
               mountPath: /var/lib/grafana/dashboards
-            {{- if .Values.grafana.persistence.enabled }}
-            - name: storage
-              mountPath: /var/lib/grafana
-            {{- end }}
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "grafana.fullname" . }}
+                  name: grafana
                   key: admin-password
       volumes:
         - name: grafana-datasources
           configMap:
-            name: {{ include "grafana.fullname" . }}-datasources
+            name: grafana-datasources
         - name: grafana-provisioning
           configMap:
-            name: {{ include "grafana.fullname" . }}-provisioning
+            name: grafana-provisioning
         - name: grafana-dashboards
           configMap:
-            name: {{ include "grafana.fullname" . }}-dashboards
-        {{- if .Values.grafana.persistence.enabled }}
-        - name: storage
-          persistentVolumeClaim:
-            claimName: {{ include "grafana.fullname" . }}
-        {{- end }}
+            name: grafana-dashboards

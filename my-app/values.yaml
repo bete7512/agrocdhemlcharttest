@@ -60,6 +60,9 @@ grafana:
   service:
     type: ClusterIP
     port: 3000
+  persistence:
+    enabled: false
+
 
 
 # replicaCount: 2
