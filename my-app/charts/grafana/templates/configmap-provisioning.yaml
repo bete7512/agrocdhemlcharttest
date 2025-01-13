@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-provisioning
+ name: {{ include "grafana.fullname" . }}-provisioning
   namespace: {{ .Release.Namespace }}
   labels:
-    app: grafana
+    {{- include "grafana.labels" . | nindent 4 }}
 data:
   dashboards.yaml: |-
     apiVersion: 1

@@ -1,7 +1,11 @@
+{{- if .Values.prometheus.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: backend-monitor
+  name: {{ .Release.Name }}-backend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: backend
 spec:
   selector:
     matchLabels:
@@ -9,12 +13,14 @@ spec:
   endpoints:
     - port: http
       path: /metrics
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: frontend-monitor
+  name: {{ .Release.Name }}-frontend
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: frontend
 spec:
   selector:
     matchLabels:
@@ -22,12 +28,14 @@ spec:
   endpoints:
     - port: http
       path: /metrics
-
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: mongodb-monitor
+  name: {{ .Release.Name }}-mongodb
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: mongodb
 spec:
   selector:
     matchLabels:
@@ -35,3 +43,4 @@ spec:
   endpoints:
     - port: mongodb
       path: /metrics
+{{- end }}

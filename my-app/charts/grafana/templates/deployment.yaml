@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana
+  name: {{ include "grafana.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: grafana
+    {{- include "grafana.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grafana
+      {{- include "grafana.labels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: grafana
+        {{- include "grafana.labels" . | nindent 8 }}
     spec:
       containers:
         - name: grafana
@@ -29,23 +29,28 @@ spec:
               mountPath: /etc/grafana/provisioning/dashboards
             - name: grafana-dashboards
               mountPath: /var/lib/grafana/dashboards
+            {{- if .Values.grafana.persistence.enabled }}
+            - name: storage
+              mountPath: /var/lib/grafana
+            {{- end }}
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: grafana
+                  name: {{ include "grafana.fullname" . }}
                   key: admin-password
-            - name: GF_AUTH_ANONYMOUS_ENABLED
-              value: "true"
-            - name: GF_AUTH_ANONYMOUS_ORG_ROLE
-              value: Viewer
       volumes:
         - name: grafana-datasources
           configMap:
-            name: grafana-datasources
+            name: {{ include "grafana.fullname" . }}-datasources
         - name: grafana-provisioning
           configMap:
-            name: grafana-provisioning
+            name: {{ include "grafana.fullname" . }}-provisioning
         - name: grafana-dashboards
           configMap:
-            name: grafana-dashboards
+            name: {{ include "grafana.fullname" . }}-dashboards
+        {{- if .Values.grafana.persistence.enabled }}
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ include "grafana.fullname" . }}
+        {{- end }}
