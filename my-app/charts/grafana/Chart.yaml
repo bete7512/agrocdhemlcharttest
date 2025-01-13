@@ -1,0 +1,5 @@
+apiVersion: v2
+name: grafana
+description: Grafana dashboards for the application stack
+version: 1.0.0
+type: application

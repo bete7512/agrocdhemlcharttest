@@ -33,6 +33,24 @@ mongodb:
 nginx:
   enabled: true
   replicaCount: 1
+prometheus:
+  enabled: true
+  retention:
+    time: 15d
+    size: 50GB
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+grafana:
+  enabled: true
+  adminPassword: your-secure-password
+  ingress:
+    enabled: false
 
 # replicaCount: 2
 

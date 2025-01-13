@@ -1,0 +1,14 @@
+retention:
+  time: 15d
+  size: 50GB
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+storage:
+  size: 50Gi

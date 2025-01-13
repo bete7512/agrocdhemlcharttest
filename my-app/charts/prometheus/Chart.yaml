@@ -1,0 +1,5 @@
+apiVersion: v2
+name: prometheus
+description: Prometheus monitoring for the application stack
+version: 1.0.0
+type: application
