@@ -1,8 +1,9 @@
-{{- if .Values.prometheus.serviceMonitor.enabled }}
+{{- if .Values.prometheus.serviceMonitors.enabled }}
+{{- if .Values.prometheus.serviceMonitors.backend.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ .Release.Name }}-backend
+  name: backend-monitor
   namespace: {{ .Release.Namespace }}
   labels:
     app: backend
@@ -14,10 +15,12 @@ spec:
     - port: http
       path: /metrics
 ---
+{{- end }}
+{{- if .Values.prometheus.serviceMonitors.frontend.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ .Release.Name }}-frontend
+  name: frontend-monitor
   namespace: {{ .Release.Namespace }}
   labels:
     app: frontend
@@ -29,10 +32,12 @@ spec:
     - port: http
       path: /metrics
 ---
+{{- end }}
+{{- if .Values.prometheus.serviceMonitors.mongodb.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ .Release.Name }}-mongodb
+  name: mongodb-monitor
   namespace: {{ .Release.Namespace }}
   labels:
     app: mongodb
@@ -43,4 +48,5 @@ spec:
   endpoints:
     - port: mongodb
       path: /metrics
+{{- end }}
 {{- end }}
