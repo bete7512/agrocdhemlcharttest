@@ -272,7 +272,7 @@ data:
               },
               "editorMode": "code",
               "expr": "rate(mongodb_op_counters_total[5m])",
-              "legendFormat": "{{operation}}",
+              "legendFormat": "MongoDB Ops - $__series",
               "range": true,
               "refId": "A"
             }
