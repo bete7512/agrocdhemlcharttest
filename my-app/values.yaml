@@ -45,6 +45,14 @@ prometheus:
     limits:
       cpu: 1000m
       memory: 1Gi
+  serviceMonitors:
+    enabled: true
+    backend:
+      enabled: true
+    frontend:
+      enabled: true
+    mongodb:
+      enabled: true
 
 grafana:
   enabled: true
