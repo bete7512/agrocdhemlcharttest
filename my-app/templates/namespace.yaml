@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Release.Namespace }}
+  labels:
+    name: {{ .Release.Namespace }}
+    environment: {{ .Values.global.environment }}
+    {{- if .Values.global.labels }}
+    {{- toYaml .Values.global.labels | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- if .Values.global.annotations }}
+    {{- toYaml .Values.global.annotations | nindent 4 }}
+    {{- end }}
+    argocd.argoproj.io/sync-wave: "-1"  # Ensures namespace is created first
