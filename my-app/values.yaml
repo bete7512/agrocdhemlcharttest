@@ -44,7 +44,7 @@ nginx:
 prometheus:
   enabled: true
   serviceMonitors:
-    enabled: false    # This is the main serviceMonitor setting
+    enabled: false
   retention:
     time: 15d
     size: 50GB

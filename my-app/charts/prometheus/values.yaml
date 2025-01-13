@@ -12,10 +12,10 @@ resources:
 
 storage:
   size: 50Gi
+enabled: true
 serviceMonitors:
   enabled: false
 monitors:
-  enabled: true
   backend:
     enabled: true
   frontend:
