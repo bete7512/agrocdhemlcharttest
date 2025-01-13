@@ -57,8 +57,10 @@ prometheus:
 grafana:
   enabled: true
   adminPassword: your-secure-password
-  ingress:
-    enabled: false
+  service:
+    type: ClusterIP
+    port: 3000
+
 
 # replicaCount: 2
 
