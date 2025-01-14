@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: gcr.io/google-samples/hello-app
+  repository: liudanking/golang-hello
   tag: 1.0
   pullPolicy: IfNotPresent
 
